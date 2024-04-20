@@ -8,12 +8,12 @@ $pesoIniziale = [];
 while (($data = fgetcsv($file, 1024,";"))!== FALSE) {
     $all_record_array[] = $data;
     $code = $data[0];
-    $weight = (int)$data[1];
+    peso = (int)$data[1];
     if (!isset($pesi[$code])) {
         $pesi[$code] = [];
-        $pesoIniziale[$code] = $weight;
+        $pesoIniziale[$code] = $peso;
     }
-    $pesi[$code][] = $weight;
+    $pesi[$code][] = $peso;
 }
 fclose($file);
 
