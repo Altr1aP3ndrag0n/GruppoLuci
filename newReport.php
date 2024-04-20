@@ -3,13 +3,26 @@ $s = "ciao";
 $file = fopen('csv.csv', 'r');
 $data = fgetcsv($file, 1000, ";"); 
 $all_record_array = [];
-while (($data = fgetcsv($file, 1024,";")) !== FALSE) {
+$pesi = [];
+$pesoIniziale = [];
+while (($data = fgetcsv($file, 1024,";"))!== FALSE) {
     $all_record_array[] = $data;
+    $code = $data[0];
+    $weight = (int)$data[1];
+    if (!isset($pesi[$code])) {
+        $pesi[$code] = [];
+        $pesoIniziale[$code] = $weight;
+    }
+    $pesi[$code][] = $weight;
 }
 fclose($file);
 
-//echo "<pre>"; print_r($all_record_array);
-//header("location:reports.php?s=$s&data=$data");
+foreach ($pesi as $code => $listaDelPeso) {
+    $peso_medio = array_sum($listaDelPeso) / count($listaDelPeso);
+    $pesoIniziale = $pesoIniziale[$code];
+    $tuttiMateriale = $peso_medio - (int)$pesoIniziale;
+    
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +38,11 @@ fclose($file);
             <th>EMS</th> <th>PESO</th> <th>MISURA</th>
         </thead>
         <tbody>
-            <?php foreach($all_record_array as $record){ ?>
+            <?php foreach($all_record_array as $record){?>
                 <tr><td><?=$record[0]?></td><td><?=$record[1]?></td><td><?=$record[2]?></td></tr>
-            <?php } ?>
+            <?php }?>
+
+            <tr><td><?=$code ?></td><td><?=$peso_medio?></td><td><?=$record[2]?></td></tr>
         </tbody>
     </table>
 </body>
