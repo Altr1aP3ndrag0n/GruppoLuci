@@ -11,42 +11,49 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Reports</title>
-</head>
+    <head>
+        <title>Reports</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
-        <form name="ordinamento" action="" method="get">
-            <select name="ordinare">
-                <option value="Codice">Codice</option>
-                <option value="PesoPulito">Peso Pulito</option>
-                <option value="PesoUtilizzato">Peso Utilizzato</option>
-            </select>
-            <input type="submit" value="">
-        </form>
-
-        <form name="ricerca" action="location.reload();">
-            
+        <header class="header">
+            <div class="div-logo">
+                <img src="logo_gesteco.png" alt="logo" id="logo">
+            </div>
+            <div class="form_ricerca">
+                <form name="ordinamento" action="" method="get">
+                    <select name="ordinare" id="ordinamento">
+                        <option value="Codice">Codice</option>
+                        <option value="PesoPulito">Peso Pulito</option>
+                        <option value="PesoUtilizzato">Peso Utilizzato</option>
+                    </select>
+                    <input type="submit" value="Ordina">
+                </form>
         
-            <input type="text" name="ricerca" id="ricerca" placeholder="cerca">
-            <input type="submit" value="cerca">
+                <form name="ricerca" action="location.reload();">
+                    
+                
+                    <input type="text" name="ricerca" id="ricerca" placeholder="Cerca">
+                    <input type="submit" value="Cerca">
 
-
-            <?php if(isset($_GET['ricerca'])) {
-                $ricerca = $_GET['ricerca'];
-                // Prepara la query SQL con il filtro di ricerca
-                $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%'";
-            } else {
-                // Query per selezionare tutti i record se non è stata eseguita una ricerca
-                $sql = "SELECT * FROM Filtri";
-            }
-
-            $query = mysqli_prepare($conn, $sql);
-             mysqli_stmt_execute($query);
-             $ris = mysqli_stmt_get_result($query);
-            ?>
-
-        </form>
+                    <?php if(isset($_GET['ricerca'])) {
+                    $ricerca = $_GET['ricerca'];
+                    // Prepara la query SQL con il filtro di ricerca
+                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%'";
+                    } else {
+                        // Query per selezionare tutti i record se non è stata eseguita una ricerca
+                        $sql = "SELECT * FROM Filtri";
+                    }
         
+                    $query = mysqli_prepare($conn, $sql);
+                     mysqli_stmt_execute($query);
+                     $ris = mysqli_stmt_get_result($query);
+                    ?>
+
+                </form>
+            </div>
+        </header>
+
         <table>
             <thead>
                 <tr>
@@ -65,7 +72,11 @@
                         <td><?php echo $row["Codice"] ?></td>
                         <td><?php echo $row["PesoPulito"] ?></td>
                         <td><?php echo $row["PesoUtilizzato"] ?></td>
-                        
+                        <td rowspan="2">
+                            <form name="esportazione" action="">
+                                <input type="submit" value="Esporta" id="esporta">
+                            </form>
+                        </td>
                     </tr>   
                 <?php
                         $i++;
@@ -74,7 +85,6 @@
                 ?>
             </tbody>
         </table>
-        <form name="esportazione" action=""><input type="submit" value="Esporta"></form>
 
     </body>
 </html>
