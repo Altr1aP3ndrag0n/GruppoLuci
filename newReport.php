@@ -1,49 +1,36 @@
 <?php
+include_once 'db_connect.php';
+$db = $conn;
+
 $s = "ciao";
 $file = fopen('csv.csv', 'r');
 $data = fgetcsv($file, 1000, ";"); 
 $all_record_array = [];
 $pesi = [];
-$pesoIniziale = [];
+$PesoUtilizzatos = [];
 while (($data = fgetcsv($file, 1024,";"))!== FALSE) {
     $all_record_array[] = $data;
-    $code = $data[0];
-    peso = (int)$data[1];
-    if (!isset($pesi[$code])) {
-        $pesi[$code] = [];
-        $pesoIniziale[$code] = $peso;
+    $Codice = $data[0];
+    $weight = (int)$data[1]; 
+    if (!isset($pesi[$Codice])) {
+        $pesi[$Codice] = [];
+        $PesoUtilizzatos[$Codice] = $weight;
     }
-    $pesi[$code][] = $peso;
+    $pesi[$Codice][] = $weight;
 }
 fclose($file);
 
-foreach ($pesi as $code => $listaDelPeso) {
-    $peso_medio = array_sum($listaDelPeso) / count($listaDelPeso);
-    $pesoIniziale = $pesoIniziale[$code];
-    $tuttiMateriale = $peso_medio - (int)$pesoIniziale;
-    
-}
+foreach ($pesi as $Codice => $ListaPesi) {
+    $PesoPulito = array_sum($ListaPesi) / count($ListaPesi);
+    $PesoUtilizzato = $PesoUtilizzatos[$Codice];
+    $material_collected = $PesoPulito - (int)$PesoUtilizzato;
+
+    $stmt = $db->prepare("INSERT INTO Filtri (Codice, PesoPulito, PesoUtilizzato) VALUES (:Codice, :PesoPulito, :PesoUtilizzato)");
+    $stmt->bindParam(':PesoUtilizzato', $PesoUtilizzato);
+    $stmt->bindParam(':Codice', $Codice);
+    $stmt->bindParam(':PesoPulito', $PesoPulito);
+    $stmt->execute();
+ 
+    echo "Codice: $Codice, PesoPulito: $PesoPulito, Peso utilizzato: $PesoUtilizzaton";
+    }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <table>
-        <thead>
-            <th>EMS</th> <th>PESO</th> <th>MISURA</th>
-        </thead>
-        <tbody>
-            <?php foreach($all_record_array as $record){?>
-                <tr><td><?=$record[0]?></td><td><?=$record[1]?></td><td><?=$record[2]?></td></tr>
-            <?php }?>
-
-            <tr><td><?=$code ?></td><td><?=$peso_medio?></td><td><?=$record[2]?></td></tr>
-        </tbody>
-    </table>
-</body>
-</html>
