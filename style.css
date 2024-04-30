@@ -4,8 +4,8 @@ header {
     left: 0;
     width: 100%;
     background-color: #093D14;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px -6px #222;
+    padding: 1.5vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -14,7 +14,7 @@ header {
 }
 
 #logo {
-    width: 50vh;
+    width: 30vw;
 }
 
 .form_ricerca {
@@ -23,28 +23,36 @@ header {
 }
 
 .form_ricerca form {
-    margin-right: 10vh;
+    margin-right: 2vw;
 }
 
-.form_ricerca input[type="text"], #ordinamento {
-    padding: 6px;
+.form_ricerca input[type="text"], /*pulsantini*/
+#ordinamento,
+#esporta {
+    padding: 0.8vw;
     border-radius: 4px;
     border: 1px solid #D9D9D9;
     background-color: #D9D9D9;
+    width: 12vw;
 }
 
-.form_ricerca input[type="submit"], #esporta {
+.form_ricerca input[type="submit"],
+#esporta {
     background-color: #049444;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    padding: 8px;
+    padding: 0.8vw 1.6vw;
+    margin-left: 1vw;
 }
 
 table {
-    width: 100%;
-    margin-top: 5vh; 
+    width: 90vw;
+    margin-top: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    align-items: center;
     border-collapse: collapse;
     background-color: #D9D9D9;
 }
@@ -54,7 +62,7 @@ table, th, td {
 }
 
 th, td {
-    padding: 12px;
+    padding: 1.2vw;
     text-align: center;
 }
 
@@ -65,5 +73,5 @@ thead {
 body {
     font-family: Arial, sans-serif;
     background-color: #D2B467;
-    margin-top: 70px;
+    margin-top: 10vh;
 }
