@@ -6,7 +6,7 @@ $db = $conn;
 $s = "ciao";
 $namefile = "csv.csv";
 $file = fopen($namefile, 'r');
-fgetcsv($file, 1000, ";"); // Skip the header row
+fgetcsv($file, 1000, ";");
 
 $pesi = [];
 $Pesoutilizzato = [];
