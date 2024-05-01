@@ -67,7 +67,25 @@
                 ?>
             </tbody>
         </table>
-        <form name="esportazione" action=""><input type="submit" value="Esporta"></form>
+        <form name="importazione" action="newReport.php?file=<?php echo urlencode($_FILES["fileToUpload"]["name"]); ?>" method="post" enctype="multipart/form-data" onsubmit="return verificaFile()">
+                    
+        <input type="file" name=" file" id="file">
+        <input type="submit" value="Importa file" name="submit">
+    
+        </form>
 
     </body>
+
+    <script>
+    function verificaFile() {
+        var fileInput = document.getElementById('file');
+        if (fileInput.files.length === 0) {
+            alert('Seleziona un file da caricare');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+   
 </html>
