@@ -70,11 +70,4 @@
         <form name="esportazione" action=""><input type="submit" value="Esporta"></form>
 
     </body>
-    <script>
-        function modificaRicerca() {
-            var ricercaInput = document.getElementById('ricercaInput');
-            var ricercaValue = ricercaInput.value.trim(); 
-            ricercaInput.value = ricercaValue; 
-        }
-    </script>
 </html>
