@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Reports</title>
 </head>
     <body>
+        <img src="gesteco.png" alt="logo di gesteco" id="logo">
         <form name="ordinamento" action="" method="get">
             <select name="ordinare">
                 <option value="Codice">Codice</option>
@@ -67,25 +69,7 @@
                 ?>
             </tbody>
         </table>
-        <form name="importazione" action="newReport.php?file=<?php echo urlencode($_FILES["fileToUpload"]["name"]); ?>" method="post" enctype="multipart/form-data" onsubmit="return verificaFile()">
-                    
-        <input type="file" name=" file" id="file">
-        <input type="submit" value="Importa file" name="submit">
-    
         </form>
 
     </body>
-
-    <script>
-    function verificaFile() {
-        var fileInput = document.getElementById('file');
-        if (fileInput.files.length === 0) {
-            alert('Seleziona un file da caricare');
-            return false;
-        }
-
-        return true;
-    }
-</script>
-   
 </html>
