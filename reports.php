@@ -40,7 +40,7 @@
 
                     <?php if(isset($_GET['ricerca'])) {
                     $ricerca = $_GET['ricerca'];
-                    $ordinamento = $_GET['ordinare'];
+                    $ordinamento = ($_GET['ordinare']) " " : $_GET['ordinare'] :;
                     // Prepara la query SQL con il filtro di ricerca
                     $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%' ORDER BY '%$ordinamento%'";
                     } else {
