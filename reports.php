@@ -30,7 +30,7 @@
                     <input type="submit" value="Ordina">
                 </form>
 
-                <form name="ricerca" action="location.reload();">
+                <form name="ricerca" action="#" method="get">
 
 
                     <input type="text" name="ricerca" id="ricerca" placeholder="Cerca">
@@ -72,11 +72,6 @@
                         <td><?php echo $row["Codice"] ?></td>
                         <td><?php echo $row["PesoPulito"] ?></td>
                         <td><?php echo $row["PesoUtilizzato"] ?></td>
-                        <td rowspan="2">
-                            <form name="esportazione" action="">
-                                <input type="submit" value="Esporta" id="esporta">
-                            </form>
-                        </td>
                     </tr>   
                 <?php
                         $i++;

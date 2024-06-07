@@ -59,6 +59,7 @@ table {
 
 table, th, td {
     border: 1px solid #777;
+    margin-top: 20vh;
 }
 
 th, td {
