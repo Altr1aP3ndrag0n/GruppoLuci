@@ -21,13 +21,15 @@
                 <img src="gesteco.png" alt="logo" id="logo">
             </div>
             <div class="form_ricerca">
-                <form name="ordinamento" action="" method="get">
+                <form name="ordinamento" action="#" method="get">
                     <select name="ordinare" id="ordinamento">
                         <option value="Codice">Codice</option>
                         <option value="PesoPulito">Peso Pulito</option>
                         <option value="PesoUtilizzato">Peso Utilizzato</option>
                     </select>
                     <input type="submit" value="Ordina">
+                    <?
+                    ?>
                 </form>
 
                 <form name="ricerca" action="#" method="get">
@@ -38,11 +40,12 @@
 
                     <?php if(isset($_GET['ricerca'])) {
                     $ricerca = $_GET['ricerca'];
+                    $ordinamento = $_GET['ordinare'];
                     // Prepara la query SQL con il filtro di ricerca
-                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%'";
+                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%' ORDER BY $ordinamento";
                     } else {
                         // Query per selezionare tutti i record se non è stata eseguita una ricerca
-                        $sql = "SELECT * FROM Filtri";
+                        $sql = "SELECT * FROM Filtri ORDER BY $ordinamento";
                     }
 
                     $query = mysqli_prepare($conn, $sql);
