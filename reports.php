@@ -42,10 +42,10 @@
                     $ricerca = $_GET['ricerca'];
                     $ordinamento = $_GET['ordinare'];
                     // Prepara la query SQL con il filtro di ricerca
-                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%' ORDER BY $ordinamento";
+                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%' ORDER BY '%$ordinamento%'";
                     } else {
                         // Query per selezionare tutti i record se non è stata eseguita una ricerca
-                        $sql = "SELECT * FROM Filtri ORDER BY $ordinamento";
+                        $sql = "SELECT * FROM Filtri ORDER BY '%$ordinamento%'";
                     }
 
                     $query = mysqli_prepare($conn, $sql);
