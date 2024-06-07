@@ -21,38 +21,23 @@
                 <img src="gesteco.png" alt="logo" id="logo">
             </div>
             <div class="form_ricerca">
-                <form name="ordinamento" action="#" method="get">
-                    <select name="ordinare" id="ordinamento">
-                        <option value="Codice">Codice</option>
-                        <option value="PesoPulito">Peso Pulito</option>
-                        <option value="PesoUtilizzato">Peso Utilizzato</option>
-                    </select>
-                    <input type="submit" value="Ordina">
-                    <?
-                    ?>
-                </form>
-
-                <form name="ricerca" action="#" method="get">
-
-
+                <form name="ricerca" action="" method="get">
                     <input type="text" name="ricerca" id="ricerca" placeholder="Cerca">
                     <input type="submit" value="Cerca">
 
                     <?php if(isset($_GET['ricerca'])) {
                     $ricerca = $_GET['ricerca'];
-                    $ordinamento = ($_GET['ordinare']) $_GET['ordinare'] : " ";
                     // Prepara la query SQL con il filtro di ricerca
-                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%' ORDER BY '%$ordinamento%'";
+                    $sql = "SELECT * FROM Filtri WHERE Codice LIKE '%$ricerca%' OR PesoPulito LIKE '%$ricerca%' OR PesoUtilizzato LIKE '%$ricerca%'";
                     } else {
                         // Query per selezionare tutti i record se non è stata eseguita una ricerca
-                        $sql = "SELECT * FROM Filtri ORDER BY '%$ordinamento%'";
+                        $sql = "SELECT * FROM Filtri";
                     }
 
                     $query = mysqli_prepare($conn, $sql);
                      mysqli_stmt_execute($query);
                      $ris = mysqli_stmt_get_result($query);
                     ?>
-
                 </form>
             </div>
         </header>
@@ -68,19 +53,17 @@
             <tbody>
             <?php 
                 if(mysqli_num_rows($ris) >= 0) {
-                    $i = 0;    
                     while($row = mysqli_fetch_assoc($ris)) {
-                ?>
+            ?>
                     <tr>
                         <td><?php echo $row["Codice"] ?></td>
                         <td><?php echo $row["PesoPulito"] ?></td>
                         <td><?php echo $row["PesoUtilizzato"] ?></td>
                     </tr>   
-                <?php
-                        $i++;
+            <?php
                     }
-                    }
-                ?>
+                }
+            ?>
             </tbody>
         </table>
 
